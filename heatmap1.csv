@@ -1,0 +1,620 @@
+country,sport,gold,silver,bronze  ,total
+USA,Archery,0,1,1,2
+,,,,,
+USA,Athletics (track & field),0,0,0,0
+,,,,,
+USA,Badminton,0,0,0,0
+,,,,,
+USA,Basketball,2,0,0,2
+,,,,,
+USA,Boxing,1,1,1,3
+,,,,,
+USA,Canoeing,0,0,0,0
+,,,,,
+USA,Cycling,2,3,0,5
+,,,,,
+USA,Diving,0,0,0,0
+,,,,,
+USA,Equestrian,0,0,0,0
+,,,,,
+USA,Fencing,0,0,0,0
+,,,,,
+USA,Field hockey,0,0,0,0
+,,,,,
+USA,Football (soccer),0,0,0,0
+,,,,,
+USA,Golf,0,0,1,1
+,,,,,
+USA,Gymnastics,0,0,0,0
+,,,,,
+USA,Handball,0,0,0,0
+,,,,,
+USA,Judo,1,1,0,2
+,,,,,
+USA,Modern pentathlon,0,0,0,0
+,,,,,
+USA,Rowing,1,1,0,2
+,,,,,
+USA,Rugby sevens,0,0,0,0
+,,,,,
+USA,Sailing,0,0,1,1
+,,,,,
+USA,Shooting,1,0,2,3
+,,,,,
+USA,Swimming,0,0,0,0
+,,,,,
+USA,Synchronized swimming,0,0,0,0
+,,,,,
+USA,Table tennis,0,0,0,0
+,,,,,
+USA,Taekwondo,0,0,1,1
+,,,,,
+USA,Tennis,1,1,1,3
+,,,,,
+USA,Triathlon,1,0,0,1
+,,,,,
+USA,Volleyball,0,0,3,3
+,,,,,
+USA,Water polo,0,0,0,0
+,,,,,
+USA,Weightlifting,0,0,1,1
+,,,,,
+USA,Wrestling,2,0,1,3
+,,,,,
+CHINA,Archery,0,0,0,0
+,,,,,
+CHINA,Athletics (track & field),2,2,2,6
+,,,,,
+CHINA,Badminton,2,0,1,3
+,,,,,
+CHINA,Basketball,0,0,0,0
+,,,,,
+CHINA,Boxing,0,1,3,4
+,,,,,
+CHINA,Canoeing,0,0,0,0
+,,,,,
+CHINA,Cycling,1,0,0,1
+,,,,,
+CHINA,Diving,7,2,1,10
+,,,,,
+CHINA,Equestrian,0,0,0,0
+,,,,,
+CHINA,Fencing,0,1,1,2
+,,,,,
+CHINA,Field hockey,0,0,0,0
+,,,,,
+CHINA,Football (soccer),0,0,0,0
+,,,,,
+CHINA,Golf,0,0,1,1
+,,,,,
+CHINA,Gymnastics,0,1,4,5
+,,,,,
+CHINA,Handball,0,0,0,0
+,,,,,
+CHINA,Judo,0,0,2,2
+,,,,,
+CHINA,Modern pentathlon,0,0,0,0
+,,,,,
+CHINA,Rowing,0,0,2,2
+,,,,,
+CHINA,Rugby sevens,0,0,0,0
+,,,,,
+CHINA,Sailing,0,1,0,1
+,,,,,
+CHINA,Shooting,1,2,4,7
+,,,,,
+CHINA,Swimming,1,2,3,6
+,,,,,
+CHINA,Synchronized swimming,0,2,0,2
+,,,,,
+CHINA,Table tennis,4,2,0,6
+,,,,,
+CHINA,Taekwondo,2,0,0,2
+,,,,,
+CHINA,Tennis,0,0,0,0
+,,,,,
+CHINA,Triathlon,0,0,0,0
+,,,,,
+CHINA,Volleyball,1,0,0,1
+,,,,,
+CHINA,Water polo,0,0,0,0
+,,,,,
+CHINA,Weightlifting,5,2,0,7
+,,,,,
+CHINA,Wrestling,0,0,2,2
+,,,,,
+GREAT BRITAIN,Archery,0,0,0,0
+,,,,,
+GREAT BRITAIN,Athletics (track & field),0,0,0,0
+,,,,,
+GREAT BRITAIN,Badminton,0,0,1,1
+,,,,,
+GREAT BRITAIN,Basketball,0,0,0,0
+,,,,,
+GREAT BRITAIN,Boxing,0,0,0,0
+,,,,,
+GREAT BRITAIN,Canoeing,2,2,0,4
+,,,,,
+GREAT BRITAIN,Cycling,6,4,2,12
+,,,,,
+GREAT BRITAIN,Diving,1,1,1,3
+,,,,,
+GREAT BRITAIN,Equestrian,0,0,0,0
+,,,,,
+GREAT BRITAIN,Fencing,0,0,0,0
+,,,,,
+GREAT BRITAIN,Field hockey,1,0,0,1
+,,,,,
+GREAT BRITAIN,Football (soccer),0,0,0,0
+,,,,,
+GREAT BRITAIN,Golf,1,0,0,1
+,,,,,
+GREAT BRITAIN,Gymnastics,2,2,3,7
+,,,,,
+GREAT BRITAIN,Handball,0,0,0,0
+,,,,,
+GREAT BRITAIN,Judo,0,0,1,1
+,,,,,
+GREAT BRITAIN,Modern pentathlon,0,0,0,0
+,,,,,
+GREAT BRITAIN,Rowing,3,2,0,5
+,,,,,
+GREAT BRITAIN,Rugby sevens,0,1,0,1
+,,,,,
+GREAT BRITAIN,Sailing,0,0,0,0
+,,,,,
+GREAT BRITAIN,Shooting,0,0,2,2
+,,,,,
+GREAT BRITAIN,Swimming,0,0,0,0
+,,,,,
+GREAT BRITAIN,Synchronized swimming,0,0,0,0
+,,,,,
+GREAT BRITAIN,Table tennis,0,0,0,0
+,,,,,
+GREAT BRITAIN,Taekwondo,1,1,1,3
+,,,,,
+GREAT BRITAIN,Tennis,1,0,0,1
+,,,,,
+GREAT BRITAIN,Triathlon,1,1,1,3
+,,,,,
+GREAT BRITAIN,Volleyball,0,0,0,0
+,,,,,
+GREAT BRITAIN,Water polo,0,0,0,0
+,,,,,
+GREAT BRITAIN,Weightlifting,0,0,0,0
+,,,,,
+GREAT BRITAIN,Wrestling,0,0,0,0
+,,,,,
+RUSSIA,Archery,0,1,0,1
+,,,,,
+RUSSIA,Athletics (track & field),0,0,0,0
+,,,,,
+RUSSIA,Badminton,0,0,0,0
+,,,,,
+RUSSIA,Basketball,0,0,0,0
+,,,,,
+RUSSIA,Boxing,1,0,3,4
+,,,,,
+RUSSIA,Canoeing,0,0,1,1
+,,,,,
+RUSSIA,Cycling,0,2,1,3
+,,,,,
+RUSSIA,Diving,0,0,0,0
+,,,,,
+RUSSIA,Equestrian,0,0,0,0
+,,,,,
+RUSSIA,Fencing,4,1,2,7
+,,,,,
+RUSSIA,Field hockey,0,0,0,0
+,,,,,
+RUSSIA,Football (soccer),0,0,0,0
+,,,,,
+RUSSIA,Golf,0,0,0,0
+,,,,,
+RUSSIA,Gymnastics,3,5,3,11
+,,,,,
+RUSSIA,Handball,1,0,0,1
+,,,,,
+RUSSIA,Judo,2,0,1,3
+,,,,,
+RUSSIA,Modern pentathlon,1,0,0,1
+,,,,,
+RUSSIA,Rowing,0,0,0,0
+,,,,,
+RUSSIA,Rugby sevens,0,0,0,0
+,,,,,
+RUSSIA,Sailing,0,0,1,1
+,,,,,
+RUSSIA,Shooting,0,2,2,4
+,,,,,
+RUSSIA,Swimming,0,2,2,4
+,,,,,
+RUSSIA,Synchronized swimming,2,0,0,2
+,,,,,
+RUSSIA,Table tennis,0,0,0,0
+,,,,,
+RUSSIA,Taekwondo,0,1,0,1
+,,,,,
+RUSSIA,Tennis,1,0,0,1
+,,,,,
+RUSSIA,Triathlon,0,0,0,0
+,,,,,
+RUSSIA,Volleyball,0,0,0,0
+,,,,,
+RUSSIA,Water polo,0,0,1,1
+,,,,,
+RUSSIA,Weightlifting,0,0,0,0
+,,,,,
+RUSSIA,Wrestling,4,3,2,9
+,,,,,
+GERMANY,Archery,0,1,0,1
+,,,,,
+GERMANY,Athletics (track & field),2,0,1,3
+,,,,,
+GERMANY,Badminton,0,0,0,0
+,,,,,
+GERMANY,Basketball,0,0,0,0
+,,,,,
+GERMANY,Boxing,0,0,1,1
+,,,,,
+GERMANY,Canoeing,4,2,1,7
+,,,,,
+GERMANY,Cycling,1,0,1,2
+,,,,,
+GERMANY,Diving,0,0,1,1
+,,,,,
+GERMANY,Equestrian,2,2,2,6
+,,,,,
+GERMANY,Fencing,0,0,0,0
+,,,,,
+GERMANY,Field hockey,0,0,2,2
+,,,,,
+GERMANY,Football (soccer),1,1,0,2
+,,,,,
+GERMANY,Golf,0,0,0,0
+,,,,,
+GERMANY,Gymnastics,1,0,1,2
+,,,,,
+GERMANY,Handball,0,0,1,1
+,,,,,
+GERMANY,Judo,0,0,1,1
+,,,,,
+GERMANY,Modern pentathlon,0,0,0,0
+,,,,,
+GERMANY,Rowing,2,1,0,3
+,,,,,
+GERMANY,Rugby sevens,0,0,0,0
+,,,,,
+GERMANY,Sailing,0,0,1,1
+,,,,,
+GERMANY,Shooting,3,1,0,4
+,,,,,
+GERMANY,Swimming,0,0,0,0
+,,,,,
+GERMANY,Synchronized swimming,0,0,0,0
+,,,,,
+GERMANY,Table tennis,0,1,1,2
+,,,,,
+GERMANY,Taekwondo,0,0,0,0
+,,,,,
+GERMANY,Tennis,0,1,0,1
+,,,,,
+GERMANY,Triathlon,0,0,0,0
+,,,,,
+GERMANY,Volleyball,1,0,0,1
+,,,,,
+GERMANY,Water polo,0,0,0,0
+,,,,,
+GERMANY,Weightlifting,0,0,0,0
+,,,,,
+GERMANY,Wrestling,0,0,1,1
+,,,,,
+FRANCE,Archery,0,1,0,1
+,,,,,
+FRANCE,Athletics (track & field),0,3,3,6
+,,,,,
+FRANCE,Badminton,0,0,0,0
+,,,,,
+FRANCE,Basketball,0,0,0,0
+,,,,,
+FRANCE,Boxing,2,2,2,6
+,,,,,
+FRANCE,Canoeing,1,1,1,3
+,,,,,
+FRANCE,Cycling,0,0,1,1
+,,,,,
+FRANCE,Diving,0,0,0,0
+,,,,,
+FRANCE,Equestrian,2,1,0,3
+,,,,,
+FRANCE,Fencing,0,0,0,0
+,,,,,
+FRANCE,Field hockey,0,0,0,0
+,,,,,
+FRANCE,Football (soccer),0,0,0,0
+,,,,,
+FRANCE,Golf,0,0,0,0
+,,,,,
+FRANCE,Gymnastics,0,0,0,0
+,,,,,
+FRANCE,Handball,0,0,0,0
+,,,,,
+FRANCE,Judo,2,2,1,5
+,,,,,
+FRANCE,Modern pentathlon,0,1,0,1
+,,,,,
+FRANCE,Rowing,1,0,1,2
+,,,,,
+FRANCE,Rugby sevens,0,0,0,0
+,,,,,
+FRANCE,Sailing,1,0,2,3
+,,,,,
+FRANCE,Shooting,0,0,0,0
+,,,,,
+FRANCE,Swimming,0,2,1,3
+,,,,,
+FRANCE,Synchronized swimming,0,0,0,0
+,,,,,
+FRANCE,Table tennis,0,0,0,0
+,,,,,
+FRANCE,Taekwondo,0,1,0,1
+,,,,,
+FRANCE,Tennis,0,0,0,0
+,,,,,
+FRANCE,Triathlon,0,0,0,0
+,,,,,
+FRANCE,Volleyball,0,0,0,0
+,,,,,
+FRANCE,Water polo,0,0,0,0
+,,,,,
+FRANCE,Weightlifting,0,0,0,0
+,,,,,
+FRANCE,Wrestling,0,0,0,0
+,,,,,
+JAPAN,Archery,0,0,0,0
+,,,,,
+JAPAN,Athletics (track & field),0,1,1,2
+,,,,,
+JAPAN,Badminton,1,0,1,2
+,,,,,
+JAPAN,Basketball,0,0,0,0
+,,,,,
+JAPAN,Boxing,0,0,0,0
+,,,,,
+JAPAN,Canoeing,0,0,1,1
+,,,,,
+JAPAN,Cycling,0,0,0,0
+,,,,,
+JAPAN,Diving,0,0,0,0
+,,,,,
+JAPAN,Equestrian,0,0,0,0
+,,,,,
+JAPAN,Fencing,0,0,0,0
+,,,,,
+JAPAN,Field hockey,0,0,0,0
+,,,,,
+JAPAN,Football (soccer),0,0,0,0
+,,,,,
+JAPAN,Golf,0,0,0,0
+,,,,,
+JAPAN,Gymnastics,2,0,1,3
+,,,,,
+JAPAN,Handball,0,0,0,0
+,,,,,
+JAPAN,Judo,3,1,8,12
+,,,,,
+JAPAN,Modern pentathlon,0,0,0,0
+,,,,,
+JAPAN,Rowing,0,0,0,0
+,,,,,
+JAPAN,Rugby sevens,0,0,0,0
+,,,,,
+JAPAN,Sailing,0,0,0,0
+,,,,,
+JAPAN,Shooting,0,0,0,0
+,,,,,
+JAPAN,Swimming,2,2,3,7
+,,,,,
+JAPAN,Synchronized swimming,0,0,2,2
+,,,,,
+JAPAN,Table tennis,0,1,2,3
+,,,,,
+JAPAN,Taekwondo,0,0,0,0
+,,,,,
+JAPAN,Tennis,0,0,1,1
+,,,,,
+JAPAN,Triathlon,0,0,0,0
+,,,,,
+JAPAN,Volleyball,0,0,0,0
+,,,,,
+JAPAN,Water polo,0,0,0,0
+,,,,,
+JAPAN,Weightlifting,0,0,1,1
+,,,,,
+JAPAN,Wrestling,4,3,0,7
+,,,,,
+AUSTRALIA,Archery,0,0,1,1
+,,,,,
+AUSTRALIA,Athletics (track & field),0,1,1,2
+,,,,,
+AUSTRALIA,Badminton,0,0,0,0
+,,,,,
+AUSTRALIA,Basketball,0,0,0,0
+,,,,,
+AUSTRALIA,Boxing,0,0,0,0
+,,,,,
+AUSTRALIA,Canoeing,0,0,2,2
+,,,,,
+AUSTRALIA,Cycling,0,1,1,2
+,,,,,
+AUSTRALIA,Diving,0,0,1,1
+,,,,,
+AUSTRALIA,Equestrian,0,0,1,1
+,,,,,
+AUSTRALIA,Fencing,0,0,0,0
+,,,,,
+AUSTRALIA,Field hockey,0,0,0,0
+,,,,,
+AUSTRALIA,Football (soccer),0,0,0,0
+,,,,,
+AUSTRALIA,Golf,0,0,0,0
+,,,,,
+AUSTRALIA,Gymnastics,0,0,0,0
+,,,,,
+AUSTRALIA,Handball,0,0,0,0
+,,,,,
+AUSTRALIA,Judo,0,0,0,0
+,,,,,
+AUSTRALIA,Modern pentathlon,1,0,0,1
+,,,,,
+AUSTRALIA,Rowing,1,2,0,3
+,,,,,
+AUSTRALIA,Rugby sevens,1,0,0,1
+,,,,,
+AUSTRALIA,Sailing,1,3,0,4
+,,,,,
+AUSTRALIA,Shooting,1,0,0,1
+,,,,,
+AUSTRALIA,Swimming,3,4,3,10
+,,,,,
+AUSTRALIA,Synchronized swimming,0,0,0,0
+,,,,,
+AUSTRALIA,Table tennis,0,0,0,0
+,,,,,
+AUSTRALIA,Taekwondo,0,0,0,0
+,,,,,
+AUSTRALIA,Tennis,0,0,0,0
+,,,,,
+AUSTRALIA,Triathlon,0,0,0,0
+,,,,,
+AUSTRALIA,Volleyball,0,0,0,0
+,,,,,
+AUSTRALIA,Water polo,0,0,0,0
+,,,,,
+AUSTRALIA,Weightlifting,0,0,0,0
+,,,,,
+AUSTRALIA,Wrestling,0,0,0,0
+,,,,,
+ITALY,Archery,0,0,0,0
+,,,,,
+ITALY,Athletics (track & field),0,0,0,0
+,,,,,
+ITALY,Badminton,0,0,0,0
+,,,,,
+ITALY,Basketball,0,0,0,0
+,,,,,
+ITALY,Boxing,0,0,0,0
+,,,,,
+ITALY,Canoeing,0,0,0,0
+,,,,,
+ITALY,Cycling,1,0,1,2
+,,,,,
+ITALY,Diving,0,1,1,2
+,,,,,
+ITALY,Equestrian,0,0,0,0
+,,,,,
+ITALY,Fencing,1,3,0,4
+,,,,,
+ITALY,Field hockey,0,0,0,0
+,,,,,
+ITALY,Football (soccer),0,0,0,0
+,,,,,
+ITALY,Golf,0,0,0,0
+,,,,,
+ITALY,Gymnastics,0,0,0,0
+,,,,,
+ITALY,Handball,0,0,0,0
+,,,,,
+ITALY,Judo,1,1,0,2
+,,,,,
+ITALY,Modern pentathlon,0,0,0,0
+,,,,,
+ITALY,Rowing,0,0,2,2
+,,,,,
+ITALY,Rugby sevens,0,0,0,0
+,,,,,
+ITALY,Sailing,0,0,0,0
+,,,,,
+ITALY,Shooting,4,3,0,7
+,,,,,
+ITALY,Swimming,1,1,2,4
+,,,,,
+ITALY,Synchronized swimming,0,0,0,0
+,,,,,
+ITALY,Table tennis,0,0,0,0
+,,,,,
+ITALY,Taekwondo,0,0,0,0
+,,,,,
+ITALY,Tennis,0,0,0,0
+,,,,,
+ITALY,Triathlon,0,0,0,0
+,,,,,
+ITALY,Volleyball,0,2,0,2
+,,,,,
+ITALY,Water polo,0,1,1,2
+,,,,,
+ITALY,Weightlifting,0,0,0,0
+,,,,,
+ITALY,Wrestling,0,0,1,1
+,,,,,
+CANADA,Archery,0,0,0,0
+,,,,,
+CANADA,Athletics (track & field),1,1,4,6
+,,,,,
+CANADA,Badminton,0,0,0,0
+,,,,,
+CANADA,Basketball,0,0,0,0
+,,,,,
+CANADA,Boxing,0,0,0,0
+,,,,,
+CANADA,Canoeing,0,0,0,0
+,,,,,
+CANADA,Cycling,0,0,2,2
+,,,,,
+CANADA,Diving,0,0,2,2
+,,,,,
+CANADA,Equestrian,0,0,1,1
+,,,,,
+CANADA,Fencing,0,0,0,0
+,,,,,
+CANADA,Field hockey,0,0,0,0
+,,,,,
+CANADA,Football (soccer),0,0,1,1
+,,,,,
+CANADA,Golf,0,0,0,0
+,,,,,
+CANADA,Gymnastics,1,0,0,1
+,,,,,
+CANADA,Handball,0,0,0,0
+,,,,,
+CANADA,Judo,0,0,0,0
+,,,,,
+CANADA,Modern pentathlon,0,0,0,0
+,,,,,
+CANADA,Rowing,0,1,0,1
+,,,,,
+CANADA,Rugby sevens,0,0,1,1
+,,,,,
+CANADA,Sailing,0,0,0,0
+,,,,,
+CANADA,Shooting,0,0,0,0
+,,,,,
+CANADA,Swimming,1,1,4,6
+,,,,,
+CANADA,Synchronized swimming,0,0,0,0
+,,,,,
+CANADA,Table tennis,0,0,0,0
+,,,,,
+CANADA,Taekwondo,0,0,0,0
+,,,,,
+CANADA,Tennis,0,0,0,0
+,,,,,
+CANADA,Triathlon,0,0,0,0
+,,,,,
+CANADA,Volleyball,0,0,0,0
+,,,,,
+CANADA,Water polo,0,0,0,0
+,,,,,
+CANADA,Weightlifting,0,0,0,0
+,,,,,
+CANADA,Wrestling,1,0,0,1

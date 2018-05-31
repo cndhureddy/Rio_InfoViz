@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<!--The code is modified from : https://gist.github.com/phil-pedruco/10447085-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>geojson csv join</title>
+    <script src="d3/d3.v3.js"></script>
+	 <script src="d3/topojson.v1.min.js"></script>
+	 <script src="d3/d3-legend.min.js"></script>
+    <script src="datamaps.world.min.js?v=1"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="sitestyle.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <!-- <script type = "text/javascript" src="d3.v4.min.js"></script> -->
+    <script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.8.0/d3-legend.min.js"></script>
+      <script type = "text/javascript" src="colorbrewer.min.js"></script>
+      <!-- <script src="https://d3js.org/d3.v3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" integrity="sha384-FZY+KSLVXVyc1qAlqH9oCx1JEOlQh6iXfw3o2n3Iy32qGjXmUPWT9I0Z9e9wxYe3" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+
+<script src="mainscript.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">      </button> -->
+                <a class="navbar-brand" href="#">Rio 2016</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li ><a href="#" onclick = "onClickChloropleth207()" class="active">207 Countries</a></li>
+                    <li ><a href="#" onclick = "onClickOlympicsResults()">Results</a></li>
+                    <li><a href="#" onclick = "onClickTop10Countries()">Top 10 Countries</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="width:90% !important;">
+
+        <div class="imageRio row hideablediv">
+            <img src="rio2016.jpg" alt="mainpic">
+        </div>
+
+<!--         this fraction is for chloropleth map 
+ -->    <div class="hideablediv row chloropleth207" style="display: none;">
+            <h2> Heading for plot 1 <label class="catergory"> </label></h2>
+            <p id="report"></p>
+            <div id="select1">
+              <select class="worldmapSelectbox">
+                <option value="participants" name="worldmap" selected="true" >Participants</option>
+                <option value="total" name="worldmap"  >Total Medals</option>
+                  <option value="gold" name="worldmap">Gold</option>
+                  <option value="silver" name="worldmap">Silver</option>
+                  <option value="bronze" name="worldmap">Bronze</option>
+                  
+                  
+              </select>
+              <br/>
+            <div class="row landingPage chloroplethMap" style="height: 1000px;">
+                <div class="col-lg-1">                  
+                    <div id="selectedCountry" style="height: 800px; margin-left: 6% "></div>
+                </div>
+                <div class="col-lg-8">              
+                    <div id="map" class="col-lg-8" style="height: 800px;margin-left: 0%; "></div>
+                </div>
+                <div class="col-lg-3" >
+                <div id="medalBar" class="col-lg-2" style="height: 800px;  margin-left: -35%; "></div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+<!--         this fraction is for olympics results -->  
+        <div class="hideablediv row olympicsResults" style="display: none;">
+
+        </div>
+
+
+<!--         this fraction is for top10Countries -->  
+        <div class="hideablediv row top10Countries" style="display: none;">
+            
+            <div class="row"> 
+                <div class="stacked-chart-container js-stacked-chart-container col-lg-4">
+                    <form>
+                        <label><input type="radio" name="mode" value="stacked" checked>Stacked</label>
+                        <label><input type="radio" name="mode" value="grouped">Grouped</label>
+                    </form>
+                    <select class="stackedSelectbox">
+                      <option value="medals" name="stacked"># Medals</option>
+                      <option value="participants" name="stacked"># Participants</option>
+                    </select>
+                    <div id="remove">
+                        <svg class="stacked-chart js-stacked-chart" width="1000" height="400"></svg>
+                    </div>
+                    <div class="tooltip js-tooltip">
+                        <div class="tooltip-wrapper">
+                            <table class="tooltip-table js-tooltip-table"></table>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-lg-6">
+                       <div id="totalheatmap" style="height: 700px; width: 80%; margin-left: 2% ; margin-top: -11%; display:none;"></div>
+                 </div>
+                <script type="text/x-underscore" class="js-tooltip-table-content">
+                    <table>
+                        <% _.each(bars, function (bar) { %>
+                            <tr>
+                                <td><%= bar.name %></td>
+                                <td><%= bar.value %></td>
+                            </tr>
+                        <% }); %>
+                    </table>
+                </script>
+
+                <!-- <div id="stackedBarChart" style="height: 1000px; width: 80%; margin-left: 20% ; margin-top: -28%"></div> -->
+
+                <div id="legend"></div>
+            </div>
+
+                <br /> <br />
+
+                <div class="row">       
+                    <div class="col-lg-8"> 
+                        <div id="select" class="margin-left:10%">
+                            <select class="heatmapSelectbox">
+                              <option value="value" name="heatmap">Number</option>
+                              <option value="percent" name="heatmap">Percentage</option>
+                            </select>
+                        </div>
+
+                        <div id="menheatmap" style="height: 800px; width: 80%; margin-left: 20% ; margin-top: -11.5%;display:none;"></div>
+                        <div id="womenheatmap" style="height: 700px; width: 80%; margin-left: 20% ; margin-top: -20
+                        %;display:none;"></div>
+                      
+                    </div>
+                    <div class="col-lg-1"></div> 
+                </div>
+        </div>
+    </div>
+</body>
+
+
+
+<script type="text/javascript">
+
+    var countrySelected;
+    var h = 700, w = 960;
+function choropleth(parameter){
+console.log("parameter"+parameter);
+    $("#map").empty();
+    var colorRange=[];
+    if(parameter=="gold"){
+        colorRange=["#ffdc73","#a67c00"];
+    }
+    else if(parameter=="silver"){
+        colorRange=["#E0E0E0","#424242"];
+    }
+    else if(parameter=="bronze"){
+        colorRange=["#BCAAA4","#5D4037"];
+    }
+    else if(parameter=="total"){
+        colorRange=["#fcfbfd","#3f007d"];
+    }
+    else {
+        colorRange=["#ffffe5","#004529"];
+    }
+
+
+
+    // set-up unit projection and path
+    var projection = d3.geo.mercator()
+            .scale(1)
+            .translate([0, 0]);
+
+    var path = d3.geo.path()
+            .projection(projection);
+
+    // set-up svg canvas
+    var svg = d3.select("#map").append("svg")
+            .attr("height", h)
+            .attr("width", w);
+    var color = d3.scale.linear()
+            .range(colorRange);
+    var showValue= parameter;
+    var population = "population";
+    var record=[];
+
+    var linear = d3.scale.linear()
+            .range(colorRange);
+
+    function addRecord(d){
+       // console.log(d);
+       if(parseInt(d[showValue])!=0){
+        d[showValue]=+d[showValue];
+        d[population]=d[population];
+        
+        var obj = {key: d.countries, value: d[showValue],total: d[population]};
+        record.push(obj);
+        }
+            else{
+            console.log(showValue,d[showValue],d);
+        }
+        return d;
+
+    }
+    d3.csv("f.csv", addRecord, function(error,data1){
+        //console.log(data);
+        data=[]
+        data1.forEach(function(l){
+            if(l[showValue]!=0){
+                data.push(l);
+            }
+        });
+        console.log("--------------------------------------------------------------");
+        color.domain(d3.extent(data, function(d){
+            return d[showValue];}));
+        // color.domain(d3.extent(data, function(d){
+        //     return d[showValue];
+        // }));
+        linear.domain(d3.extent(data, function(d){
+            return d[showValue];
+        }));
+    });
+
+    //https://github.com/johan/world.geo.json
+    d3.json("countries.geo.json", function(error, data) {
+
+        d3.csv("idCountry.csv", function(error, csv) {
+            var world = data.features;
+
+            csv.forEach(function(d, i) {
+                world.forEach(function(e, j) {
+                    if (d.id === e.id) {
+                        e.name = d.name
+                    }
+                })
+            })
+
+            // calculate bounds, scale and transform
+            // see http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
+            var b = path.bounds(data),
+                    s = .95 / Math.max((b[1][0] - b[0][0]) / w, (b[1][1] - b[0][1]) / h),
+                    t = [(w - s * (b[1][0] + b[0][0])) / 2, (h - s * (b[1][1] + b[0][1])) / 2];
+
+            projection.scale(s)
+                    .translate(t);
+
+            svg.selectAll("path")
+                    .data(world).enter()
+                    .append("path")
+                    .style("fill", getColor)
+                    .style("stroke", "grey")
+                    .style("stroke-width", "1px")
+                    .attr("d", path)
+                    .on("click", function(d, i) {
+                        reporter(d);
+
+                    });
+                    // .on("mouseover", function(d, i) {
+                    //     reporter(d);
+
+                    // });
+        });
+        svg.append("g")
+                .attr("class", "legendLinear")
+                .attr("transform", "translate(20,20)");
+
+        var legendLinear = d3.legend.color()
+                .shapeWidth(60)
+                .scale(linear);
+
+        svg.select(".legendLinear")
+                .call(legendLinear);
+
+        function reporter(x) {
+            console.log(x);
+            var value = "Not known";
+            var selected_population = "Not known"
+            record.forEach(function(d){
+                if(x.name === d.key){
+                    value = d.value;
+                    selected_population = d.total
+                    return;
+                }
+            });
+            countrySelected=x.name;
+            medalsBarChart();
+            d3.select("#report").html("Patricipants from "+x.name+": "+value+"<br/>" +"Total Population :"+selected_population);
+
+        }
+
+        function getColor(data){
+            var value=-1;
+            record.forEach(function(d){
+                if(data.name === d.key){
+                    value = d.value;
+                    return;
+                }
+            });
+            if(value==-1){
+                return "none";
+            }
+            return color(value);
+        }
+
+    });
+}
+
+$('.heatmapSelectbox').on('change', function() {
+    if(this.value!="total"){
+      heatmap( this.value ,"men");
+      heatmap( this.value ,"women");
+  }
+});
+
+$('.worldmapSelectbox').on('change', function() {
+      choropleth(this.value);
+});
+
+$('.stackedSelectbox').on('change', function() {
+    generateStacked(this.value);
+    debugger;
+    if($(this).val() == "participants"){
+        $("#totalheatmap").show();
+         $("#menheatmap").show();
+          $("#womenheatmap").show();
+    }else{
+         $("#totalheatmap").hide();
+         $("#menheatmap").hide();
+          $("#womenheatmap").hide();
+    }
+
+});
+
+
+function newchoropleth(){
+    var basic_choropleth = new Datamap({
+            element : document.getElementById("map"),
+            projection : 'mercator',
+            fills : {
+                defaultFill : "#606060",
+                authorHasTraveledTo : "#4eb1d6"
+            },
+            data : {
+                USA : {
+                    fillKey : "authorHasTraveledTo",
+                    brands : 45
+                },
+                JPN : {
+                    fillKey : "authorHasTraveledTo",
+                    brands : 20
+                },
+                ITA : {
+                    fillKey : "authorHasTraveledTo",
+                    brands : 5
+                },
+                CRI : {
+                    fillKey : "authorHasTraveledTo",
+                    brands : 10
+                },
+                KOR : {
+                    fillKey : "authorHasTraveledTo",
+                    brands : 24
+                },
+                DEU : {
+                    fillKey : "authorHasTraveledTo",
+                    brands : 12
+                },
+            },
+            done : function(datamap) {
+                datamap.svg.selectAll('.datamaps-subunit').on('click',
+                        function(geography) {
+                            console.log(geography);
+                            alert(geography.id);
+                        });
+            }
+        });
+
+}
+
+  $(document).ready(function(){
+  choropleth("participants");
+   
+
+  });
+
+
+
+function heatmap(parameter,gender){
+    console.log(gender);
+    $("#"+gender+"heatmap").empty();
+    console.log(parameter);
+     var itemSize = 30,
+     buckets=12,
+      cellSize = itemSize - 1,
+      margin = {top: 250, right: 20, bottom: 20, left: 170};
+      
+  var width = 1150 - margin.right - margin.left,
+      height = 800 - margin.top - margin.bottom,
+      gridSize = Math.floor(width / 20),
+          legendElementWidth = gridSize * 1.4;
+
+  var formatDate = d3.time.format("%Y-%m-%d");
+
+  d3.csv('heatmap.csv', function ( response ) {
+
+    var data = response.map(function( item ) {
+        var newItem = {};
+        newItem.country = item.country;
+        newItem.product = item.sport;
+        if(parameter=="value"){
+            if(gender=="men"){
+            newItem.value = item.men;}
+            else{
+                newItem.value = item.women;
+            }
+        }
+        else if(parameter=="percent"){
+
+            if(gender=="men"){
+                newItem.value = parseFloat(item.men_percent);
+            }
+            else if(gender=="women"){
+                newItem.value = parseFloat(item.women_percent);
+            }
+            // newItem.value = parseFloat(item.men_percent);   
+        }
+        else if(parameter=="medal"){
+
+            if(medal=="gold"){
+                newItem.value = parseFloat(item.gold);
+            }
+            else if(medal=="silver"){
+                newItem.value = parseFloat(item.silver);
+            }
+            else if(medal=="bronze"){
+                newItem.value = parseFloat(item.bronze);
+            }
+            // newItem.value = parseFloat(item.men_percent);   
+        }
+        else{
+            newItem.value = parseFloat(item.total);
+        }
+
+        return newItem;
+    })
+
+    var x_elements = d3.set(data.map(function( item ) { return item.product; } )).values(),
+        y_elements = d3.set(data.map(function( item ) { return item.country; } )).values();
+        
+    var xScale = d3.scale.ordinal()
+        .domain(x_elements)
+        .rangeBands([0, x_elements.length * itemSize]);
+
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .tickFormat(function (d) {
+            return d;
+        })
+        .orient("top");
+
+    var yScale = d3.scale.ordinal()
+        .domain(y_elements)
+        .rangeBands([0, y_elements.length * itemSize]);
+
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .tickFormat(function (d) {
+            return d;
+        })
+        .orient("left");
+
+        if(gender=="men"){
+            var colors = colorbrewer.Blues[9];        
+        }
+        else if(gender=="women"){
+            var colors = colorbrewer.RdPu[9];
+        }
+        else if(gender=="gold"){
+            var colors = colorbrewer.RdPu[9];
+        }
+        else if(gender=="silver"){
+            var colors = colorbrewer.RdPu[9];
+        }
+        else if(gender=="bronze"){
+            var colors = colorbrewer.RdPu[9];
+        }
+        else if(gender=="total1"){
+            var colors = colorbrewer.RdPu[9];
+        }
+        else{
+         var colors = colorbrewer.YlGn[9];   
+        }
+    
+ var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+    var colorScale = d3.scale.quantile()
+              .domain([0, buckets - 1, d3.max(data, function (d) {return parseInt(d.value); })])
+              .range(colors);
+    // var colorScale = d3.scale.threshold()
+    //     .domain([0.85, 1])
+    //     .range(["#2980B9", "#E67E22", "#27AE60", "#27AE60"]);
+
+    var svg = d3.select('#'+gender+'heatmap')
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var cells = svg.selectAll('rect')
+        .data(data)
+        .enter().append('g').append('rect')
+        .attr('class', 'cell')
+        .attr('width', cellSize)
+        .attr('height', cellSize)
+        .attr('y', function(d) { return yScale(d.country); })
+        .attr('x', function(d) { return xScale(d.product); })
+        .attr('fill', function(d) { return colorScale(d.value); })
+         .on("mouseover", function(d){
+                  tooltip
+                    .style("left", d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY - 70 + "px")
+                    .style("display","inline-block")
+                    .html(Math.round(d.value* 100) / 100);
+              })
+                  .on("mouseout", function(d){ tooltip.style("display", "none");});
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .selectAll('text')
+        .attr('font-weight', 'normal');
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .call(xAxis)
+        .selectAll('text')
+        .attr('font-weight', 'normal')
+        .style("text-anchor", "start")
+        .attr("dx", ".8em")
+        .attr("dy", ".5em")
+        .attr("transform", function (d) {
+            return "rotate(-65)";
+        });
+        // if(gender!="men"){
+
+
+
+    var legend = svg.selectAll(".legend")
+              .data([0].concat(colorScale.quantiles()), (d) => d);
+
+          var legend_g = legend.enter().append("g")
+              .attr("class", "legend");
+
+          legend_g.append("rect")
+            .attr("x", (d, i) => legendElementWidth * i)
+            .attr("y", height/3+gridSize*3)
+            .attr("width", legendElementWidth)
+            .attr("height", gridSize / 2)
+            .style("fill", (d, i) => colors[i]);
+
+          legend_g.append("text")
+            .attr("class", "legend")
+            .text((d) => "≥ " + Math.round(d))
+            .attr("x", (d, i) => legendElementWidth * i + 25)
+            .attr("y", height/3+gridSize*4);
+
+          legend.exit().remove();
+      // }
+
+  });
+
+}
+
+
+
+
+
+
+
+ debugger;
+heatmap("value","men");
+heatmap("value","women");
+heatmap("total","total");
+heatmap("gold","gold");
+heatmap("silver","silver");
+heatmap("bronze","bronze");
+heatmap("total1","total1");
+
+
+function medalsBarChart(){
+    console.log(countrySelected);
+    $("#medalBar").empty();
+    var margin = {top: 20, right: 20, bottom: 30, left: 40},
+        width = 500 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+    var x0 = d3.scale.ordinal()
+        .rangeRoundBands([0, width - 150], .1);
+
+    var x1 = d3.scale.ordinal();
+
+    var y = d3.scale.linear()
+        .range([height, 0]);
+
+    var color = d3.scale.ordinal()
+        .range(["#F79620", "#F5C918", "#FF6600", "#707FBE", "#3669B3", "#009ACC", "#008C8C", "#3EBCA2","#2DB45F"]);
+      
+    var xAxis = d3.svg.axis()
+        .scale(x0)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(4);
+
+    var svg = d3.select("#medalBar").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv("f.csv", function(error, data1) {
+        if (error) throw error;
+        data=[];
+        data1.forEach(function(d){
+            if(d.countries==countrySelected){
+                data.push(d)
+            }
+        });
+        // console.log(data[0])
+        var epiNames = ["gold","silver","bronze"];//d3.keys(data[0]).filter(function(key) {return key !== "Country"; });
+        // console.log(data);
+        data.forEach(function(d) {
+            // if(d.countries==countrySelected){
+        d.epi = epiNames.map(function(name) { console.log(d[name]); console.log({name: name, value: +parseInt(d[name])}); return {name: name, value: +parseInt(d[name])};  });
+        });
+
+        //console.log(data)
+        if(data[0]["gold"]==0 && data[0]["silver"]==0 && data[0]["bronze"]==0){
+            $("#medalBar").empty();
+            d3.select("#medalBar").text(function() {
+                return countrySelected+" won no medals in 2016";  
+            });
+        }
+        else{
+            var i=0;
+            while(i<3){
+                console.log(epiNames[i]);
+                console.log(data[0][epiNames[i]]);
+              if(data[0][epiNames[i]]==0){
+                    epiNames.splice(i, 1);
+                    i-=1;
+              }
+              i+=1;
+            }
+        console.log(epiNames);
+        x0.domain(data.map(function(d) { return d.countries; }));
+        x1.domain(epiNames).rangeRoundBands([0, x0.rangeBand()]);
+        y.domain([0, d3.max(data, function(d) { return d3.max(d.epi, function(d) { return d.value; }); })]);
+
+        svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+    
+        svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+        .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 5)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end")
+          .text("Medal Count");
+
+        var country = svg.selectAll(".country")
+          .data(data)
+        .enter().append("g")
+          .attr("class", "country")
+          .attr("transform", function(d) { return "translate(" + x0(d.countries) + ",0)"; });
+
+        country.selectAll("rect")
+          .data(function(d) { return d.epi; })
+        .enter().append("rect").attr("width", x1.rangeBand())
+          .attr("x", function(d) { return x1(d.name); })
+          .attr("y", function(d) { return y(d.value); })
+          .attr("height", function(d) { return height - y(d.value); })
+            .on("mouseover", function(d){
+                  tooltip
+                    .style("left", d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY - 70 + "px")
+                    .style("display","inline-block")
+                    .html(Math.round(d.value));
+              })
+                  .on("mouseout", function(d){ tooltip.style("display", "none");})
+          .style("fill", function(d) { return color(d.name); });
+
+        var legend = svg.selectAll(".legend")
+          .data(epiNames.slice())
+          .enter().append("g")
+          .attr("class", "legend")
+          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+        legend.append("rect")
+          .attr("x", width - 18)
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", color);
+
+        legend.append("text")
+          .attr("x", width - 24)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .style("text-anchor", "end")
+          .text(function(d) { return d; });
+      }
+    });
+}
+
+function generateStacked(arg){
+
+    if(arg=="medals"){
+        var seriesNames = ["Gold", "Silver", "Bronze"];
+        var data=[{"name":"Gold","values":[]},{"name":"Silver","values":[]},{"name":"Bronze","values":[]}];
+    }
+    else{
+        var seriesNames = ["male", "female"];
+        var data=[{"name":"male","values":[]},{"name":"female","values":[]}];
+    }
+        var i=0;
+        d3.json("stacked.json", function(error, data1) {
+            data1.rows.forEach(function(obj){
+                if(arg=="medals"){
+                    data[0]["values"].push({"x":i,"y":obj["Gold"]});
+                    data[1]["values"].push({"x":i,"y":obj["Silver"]});
+                    data[2]["values"].push({"x":i,"y":obj["Bronze"]});    
+                }
+                else{
+                    data[0]["values"].push({"x":i,"y":obj["male"]});
+                    data[1]["values"].push({"x":i,"y":obj["female"]});
+                }
+                i+=1;
+            });
+
+    var svgElement = '<svg class="stacked-chart js-stacked-chart" width="1000" height="400"></svg>';
+      document.getElementById("remove").innerHTML="";
+      document.getElementById("remove").innerHTML=svgElement;
+        //var seriesNames = ["Gold", "Silver", "Bronze"];
+    // var seriesNames = ["Maybe", "No", "Yes"],
+    var numSamples = 10,
+        numSeries = seriesNames.length,
+        // data = seriesNames.map(function (name) {
+        //     return {
+        //         name: name,
+        //         values: bumpLayer(numSamples, 0.1)
+        //     };
+        // }),
+        stack = d3.layout.stack().values(function (d) { return d.values; });
+
+    stack(data);
+
+    var chartMode = "stacked",
+        numEnabledSeries = numSeries,
+        lastHoveredBarIndex,
+        containerWidth = 600,
+        containerHeight = 500,
+        margin = {top: 80, right: 30, bottom: 20, left: 30},
+        width = 500,//containerWidth - margin.left - margin.right,
+        height = 400,//containerHeight - margin.top - margin.bottom,
+        widthPerStack = width / numSamples,
+        animationDuration = 400,
+        delayBetweenBarAnimation = 10,
+        numYAxisTicks = 8,
+        maxStackY = d3.max(data, function (series) { return d3.max(series.values, function (d) { return d.y0 + d.y; }); }),
+        paddingBetweenLegendSeries = 5,
+        legendSeriesBoxX = 0,
+        legendSeriesBoxY = 0,
+        legendSeriesBoxWidth = 15,
+        legendSeriesBoxHeight = 15,
+        legendSeriesHeight = legendSeriesBoxHeight + paddingBetweenLegendSeries,
+        legendSeriesLabelX = -5,
+        legendSeriesLabelY = legendSeriesBoxHeight / 2,
+        legendMargin = 20,
+        legendX = containerWidth - legendSeriesBoxWidth - legendMargin,
+        legendY = legendMargin,
+        tooltipTemplate = _.template(document.querySelector(".js-tooltip-table-content").innerHTML),
+        overlayTopPadding = 20,
+        tooltipBottomMargin = 12;
+
+     debugger;
+    var binsScale = d3.scale.ordinal()
+        .domain(d3.range(numSamples))
+        .rangeBands([0, width], 0.1, 0.05);
+
+    var xScale = d3.scale.linear()
+        .domain([0, numSamples])
+        .range([0, width]);
+
+    var yScale = d3.scale.linear()
+        .domain([0, maxStackY])
+        .range([height, 0]);
+
+    var heightScale = d3.scale.linear()
+        .domain([0, maxStackY])
+        .range([0, height]);
+
+    var xAxis = d3.svg.axis()
+        .scale(xScale) //binsScale)
+        .ticks(numSamples)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient("left");
+
+    var enabledSeries = function () { return _.reject(data, function (series) { return series.disabled; }); };
+
+    var seriesClass = function (seriesName) { return "series-" + seriesName.toLowerCase(); };
+
+    var layerClass = function (d) { return "layer " + seriesClass(d.name); };
+
+    var legendSeriesClass = function (d) { return "clickable " + seriesClass(d); };
+
+    var barDelay = function (d, i) { return i * delayBetweenBarAnimation; };
+
+    var joinKey = function (d) { return d.name; };
+
+    var stackedBarX = function (d) { return binsScale(d.x); };
+
+    var stackedBarY = function (d) { return yScale(d.y0 + d.y); };
+
+    var stackedBarBaseY = function (d) { return yScale(d.y0); };
+
+    var stackedBarWidth = binsScale.rangeBand();
+
+    var groupedBarX = function (d, i, j) { return binsScale(d.x) + j * groupedBarWidth(); };
+
+    var groupedBarY = function (d) { return yScale(d.y); };
+
+    var groupedBarBaseY = height;
+
+    var groupedBarWidth = function () { return binsScale.rangeBand() / numEnabledSeries; };
+
+    var barHeight = function (d) { return heightScale(d.y); };
+
+    var transitionStackedBars = function (selection) {
+        selection.transition()
+            .duration(animationDuration)
+            .delay(barDelay)
+            .attr("y", stackedBarY)
+            .attr("height", barHeight);
+    };
+
+    var svg = d3.select(".js-stacked-chart")
+        .attr("width", containerWidth)
+        .attr("height", containerHeight);
+
+    var mainArea = svg.append("g")
+        .attr("class", "main-area")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    mainArea.append("g")
+        .attr("class", "grid-lines")
+        .selectAll(".grid-line").data(yScale.ticks(numYAxisTicks))
+            .enter().append("line")
+                .attr("class", "grid-line")
+                .attr("x1", 0)
+                .attr("x2", width)
+                .attr("y1", yScale)
+                .attr("y2", yScale);
+
+    var layersArea = mainArea.append("g")
+        .attr("class", "layers");
+
+    var layers = layersArea.selectAll(".layer").data(data)
+        .enter().append("g")
+            .attr("class", layerClass);
+
+    layers.selectAll("rect").data(function (d) { return d.values; })
+        .enter().append("rect")
+            .attr("x", stackedBarX)
+            .attr("y", height)
+            .attr("width", stackedBarWidth)
+            .attr("height", 0)
+            .call(transitionStackedBars);
+
+    mainArea.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    mainArea.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    svg.append("rect")
+        .attr("class", "overlay")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", width)
+        .attr("height", height)
+        .on("mousemove", showTooltip)
+        .on("mouseout", hideTooltip);
+
+    var legendSeries = svg.append("g")
+        .attr("class", "legend")
+        .attr("transform", "translate(" + legendX + "," + legendY + ")")
+        .selectAll("g").data(seriesNames.reverse())
+            .enter().append("g")
+                .attr("class", legendSeriesClass)
+                .attr("transform", function (d, i) { return "translate(0," + (i * legendSeriesHeight) + ")"; })
+                .on("click", toggleSeries);
+
+    legendSeries.append("rect")
+        .attr("class", "series-box")
+        .attr("x", legendSeriesBoxX)
+        .attr("y", legendSeriesBoxY)
+        .attr("width", legendSeriesBoxWidth)
+        .attr("height", legendSeriesBoxHeight);
+
+    legendSeries.append("text")
+        .attr("class", "series-label")
+        .attr("x", legendSeriesLabelX)
+        .attr("y", legendSeriesLabelY)
+        .text(String);
+
+
+    d3.selectAll(".js-stacked-chart-container input").on("change", changeChartMode);
+
+    /**
+     * Toggles a certain series.
+     * @param {String} seriesName The name of the series to be toggled
+     */
+    function toggleSeries (seriesName) {
+        var series,
+            isDisabling,
+            newData;
+
+        series = _.findWhere(data, { name: seriesName });
+        isDisabling = !series.disabled;
+
+        if (isDisabling === true && numEnabledSeries === 1) {
+            return;
+        }
+
+        d3.select(this).classed("disabled", isDisabling);
+
+        series.disabled = isDisabling;
+        newData = stack(enabledSeries());
+        numEnabledSeries = newData.length;
+        layers = layers.data(newData, joinKey);
+
+        if (isDisabling === true) {
+            removeSeries();
+        }
+        else {
+            addSeries();
+        }
+    }
+
+    /**
+     * Removes a certain series.
+     */
+    function removeSeries () {
+        var layerToBeRemoved;
+
+        layerToBeRemoved = layers.exit();
+        if (chartMode === "stacked") {
+            removeStackedSeries(layerToBeRemoved);
+        }
+        else {
+            removeGroupedSeries(layerToBeRemoved);
+        }
+    }
+
+    /**
+     * Smoothly transitions and then removes a certain series when the chart is in `stacked` mode.
+     * @param {d3.selection} layerToBeRemoved The layer that contains the series' bars
+     */
+    function removeStackedSeries (layerToBeRemoved) {
+        layerToBeRemoved.selectAll("rect").transition()
+            .duration(animationDuration)
+            .delay(barDelay)
+            .attr("y", stackedBarBaseY)
+            .attr("height", 0)
+            .call(endAll, function () {
+                layerToBeRemoved.remove();
+            });
+
+        transitionStackedBars(layers.selectAll("rect"));
+    }
+
+    /**
+     * Smoothly transitions and then removes a certain series when the chart is in `grouped` mode.
+     * @param {d3.selection} layerToBeRemoved The layer that contains the series' bars
+     */
+    function removeGroupedSeries (layerToBeRemoved) {
+        layerToBeRemoved.selectAll("rect").transition()
+            .duration(animationDuration)
+            .delay(barDelay)
+            .attr("y", groupedBarBaseY)
+            .attr("height", 0)
+            .call(endAll, function () {
+                layerToBeRemoved.remove();
+
+                layers.selectAll("rect").transition()
+                    .duration(animationDuration)
+                    .delay(barDelay)
+                    .attr("x", groupedBarX)
+                    .attr("width", groupedBarWidth);
+            });
+    }
+
+    /**
+     * Adds a certain series.
+     */
+    function addSeries () {
+        var newLayer;
+
+        newLayer = layers.enter().append("g")
+            .attr("class", layerClass);
+
+        if (chartMode === "stacked") {
+            addStackedSeries(newLayer);
+        }
+        else {
+            addGroupedSeries(newLayer);
+        }
+    }
+
+    /**
+     * Smoothly transitions and adds a certain series when the chart is in `stacked` mode.
+     * @param {d3.selection} newLayer The new layer to be added
+     */
+    function addStackedSeries (newLayer) {
+        newLayer.selectAll("rect").data(function (d) { return d.values; })
+            .enter().append("rect")
+                .attr("x", stackedBarX)
+                .attr("y", stackedBarBaseY)
+                .attr("width", stackedBarWidth)
+                .attr("height", 0);
+
+        transitionStackedBars(layers.selectAll("rect"));
+    }
+
+    /**
+     * Smoothly transitions and adds a certain series when the chart is in `grouped` mode.
+     * @param {d3.selection} newLayer The new layer to be added
+     */
+    function addGroupedSeries (newLayer) {
+        var newBars;
+
+        layers.selectAll("rect").transition()
+            .duration(animationDuration)
+            .delay(barDelay)
+            .attr("x", groupedBarX)
+            .attr("width", groupedBarWidth)
+            .call(endAll, function () {
+                newBars = newLayer.selectAll("rect").data(function (d) { return d.values; })
+                    .enter().append("rect")
+                        .attr("y", groupedBarBaseY)
+                        .attr("width", groupedBarWidth)
+                        .attr("height", 0);
+
+                layers.selectAll("rect").attr("x", groupedBarX);
+
+                newBars.transition()
+                    .duration(animationDuration)
+                    .delay(barDelay)
+                    .attr("y", groupedBarY)
+                    .attr("height", barHeight);
+            });
+    }
+
+    /**
+     * Changes the chart to the selected mode: `stacked` or `grouped`.
+     * In `stacked` mode, the bars of each bin are stacked together.
+     * In `grouped` mode, the bars of each bin are placed side by side.
+     */
+    function changeChartMode() {
+        chartMode = this.value;
+        if (chartMode === "stacked") {
+            stackBars();
+        }
+        else {
+            groupBars();
+        }
+    }
+
+    /**
+     * Smoothly transitions the chart to `stacked` mode.
+     * In this mode, the bars of each bin are stacked together.
+     */
+    function stackBars() {
+        layers.selectAll("rect").transition()
+            .duration(animationDuration)
+            .delay(barDelay)
+            .attr("y", stackedBarY)
+            .transition()
+                .duration(animationDuration)
+                .attr("x", stackedBarX)
+                .attr("width", stackedBarWidth);
+    }
+
+    /**
+     * Smoothly transitions the chart to `grouped` mode.
+     * In this mode, the bars of each bin are placed side by side.
+     */
+    function groupBars() {
+        layers.selectAll("rect").transition()
+            .duration(animationDuration)
+            .delay(barDelay)
+            .attr("x", groupedBarX)
+            .attr("width", groupedBarWidth)
+            .transition()
+                .duration(animationDuration)
+                .attr("y", groupedBarY);
+    }
+
+    /**
+     * Shows the tooltip.
+     */
+    function showTooltip() {
+        var hoveredBarIndex,
+            tooltip;
+
+        hoveredBarIndex = (d3.mouse(this)[0] / widthPerStack) | 0;
+        if (hoveredBarIndex === lastHoveredBarIndex) {
+            return;
+        }
+        lastHoveredBarIndex = hoveredBarIndex;
+
+        layers.selectAll("rect").classed("highlighted", function (d, i) { return (i === hoveredBarIndex); });
+
+        tooltip = $(".js-tooltip");
+        tooltip.find(".js-tooltip-table").html(tooltipContent());
+        tooltip.css({
+            top:  margin.top  + highestBinBarHeight() - tooltip.outerHeight() - tooltipBottomMargin,
+            left: margin.left + (hoveredBarIndex * widthPerStack) + (widthPerStack / 2) - (tooltip.outerWidth() / 2),
+        }).fadeIn();
+    }
+
+    function tooltipContent () {
+        var bars;
+
+        bars = [];
+        layers.each(function (d) {
+            bars.unshift({ name: d.name, value: d.values[lastHoveredBarIndex].y.toFixed(4) });
+        });
+
+        return tooltipTemplate({ bars: bars });
+    }
+
+    /**
+     * Hides the tooltip.
+     */
+    function hideTooltip () {
+        $(".js-tooltip").stop().hide();
+
+        layers.selectAll("rect")
+            .filter(function (d, i) { return (i === lastHoveredBarIndex); })
+            .classed("highlighted", false);
+
+        lastHoveredBarIndex = undefined;
+    }
+
+    /**
+     * Calculates the height of the highest (not tallest) bar within a certain bin.
+     * @return {Number} The height, in pixels, of the highest bar within a certain bin
+     */
+    function highestBinBarHeight() {
+        var bars,
+            highestGroupBar;
+
+        if (chartMode === "stacked") {
+            highestGroupBar = _.last(layers.data()).values[lastHoveredBarIndex];
+            return yScale(highestGroupBar.y0 + highestGroupBar.y);
+        }
+        else {
+            bars = _.map(layers.data(), function (series) { return series.values[lastHoveredBarIndex]; });
+            highestGroupBar = _.max(bars, function (bar) { return bar.y; });
+            return yScale(highestGroupBar.y);
+        }
+    }
+
+    /**
+     * Calls a function at the end of **all** transitions.
+     * @param {d3.transition} transition A D3 transition
+     * @param {Function}      callback   The function to be called at the end of **all** transitions
+     */
+    function endAll (transition, callback) {
+        var n;
+
+        if (transition.empty()) {
+            callback();
+        }
+        else {
+            n = transition.size();
+            transition.each("end", function () {
+                n--;
+                if (n === 0) {
+                    callback();
+                }
+            });
+        }
+    }
+
+    // Inspired by Lee Byron's test data generator.
+    function bumpLayer(n, o) {
+
+        function bump(a) {
+            var x = 1 / (.1 + Math.random()),
+                y = 2 * Math.random() - .5,
+                z = 10 / (.1 + Math.random());
+            for (var i = 0; i < n; i++) {
+                var w = (i / n - y) * z;
+                a[i] += x * Math.exp(-w * w);
+            }
+        }
+
+        var a = [], i;
+        for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
+        for (i = 0; i < 5; ++i) bump(a);
+        return a.map(function (d, i) { return {x: i, y: Math.max(0, d)}; });
+    }
+    });
+}
+generateStacked("medals");
+
+</script>
+
+</html>
